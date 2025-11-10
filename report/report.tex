@@ -1,0 +1,239 @@
+\documentclass[conference]{IEEEtran}
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{textcomp}
+\usepackage[table,xcdraw,dvipsnames]{xcolor}
+
+\title{Data Visualization Report}
+\author{\IEEEauthorblockN{Thomas Vroom}
+i6291496, t.vroom@student.maastrichtuniversity.nl}
+
+\begin{document}
+\maketitle
+
+%
+% Week 1
+%
+\section{Chosen dataset} \noindent
+I chose the dataset "\href{https://opendata.cbs.nl/#/CBS/nl/dataset/80305ned/table?ts=1762443943511}{Nabijheid voorzieningen; afstand locatie, regionale cijfers}" from the CBS as dataset for this project.
+This dataset contains information on average distances to common facilities such as hospitals, schools, train stations etc.
+To not make things overly complicated I only used the data from 2023 (the most recent year for which the data is complete), considered the data at municipality-scale (i.e. each municipality is its own spatial area), and used the following subset of columns: 
+
+\noindent
+\\
+Avg. Distance to Closest \{GP, Pharmacy, Hospital, Supermarket, Primary School, High School, Highway, Train Station, Fire Station\}
+
+\noindent
+\\
+I used the "\href{https://www.cbs.nl/nl-nl/dossier/nederland-regionaal/geografische-data/wijk-en-buurtkaart-2023}{Wijk- en buurtkaart 2023}" as the shape file for this data, also by the CBS.
+This shape file uses the same municipality codes as the dataset, making the transformation from the original dataset to geospatial data very straightforward.
+The dataset was preprocessed in the following way:
+
+\begin{enumerate}
+    \item Select the relevant columns from the original dataset.
+    \item Remove rows that contain NaN (municipalities that do not exist anymore).
+    \item Merge the shape file and the dataset on the region codes.
+    \item Remove water areas from the shape file
+    \item Convert the coordinate system to EPSG:4326.
+    \item Export the merged shape file as GeoJSON.
+\end{enumerate}
+
+\noindent
+The final dataset has 13 columns (features) and 342 rows (spatial areas; one per municipality).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%
+% Week 2
+%
+% \section{Multivariate visualization}
+
+% \subsection{Multivariate sketches}
+% Insert all sketches with very brief explanations of the ideas.
+
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics[width=0.45\linewidth]{images/examplesketch.jpg}
+%     \caption{Example simple sketch and caption:"Shows the data via juxtaposed bar charts and textures."\label{fig:examplesketch}}
+% \end{figure}
+
+% \subsection{Best 3 sketches}
+% Insert the best 3 sketches and discuss their advantages and disadvantages for Task 1 and the dataset. You can use \autoref{fig:exampledetailedsketch} to reference them by label.
+
+% \begin{figure}[h]
+% \centering
+% \includegraphics[width=\linewidth]{images/exampledetailedsketch.pdf}
+% \caption{Example detailed sketch and description for the example simple sketch. Each barchart depicts one postcode, with the barcharts positioned out in axis-aligned rows. The barchart shows the values of the selected variables using the y-position. Percentage values are kept as is, while all other variables are min-max normalized towards the minimal and maximum value present in the entire dataset. The selected variables (up to 4) are double encoded via the x-position and a texture. Possible textures are left-hatched, right-hatched, no hatch and crosshatched. The variables can be selected by clicking on one of the distributions charts present in the template. Hovering with the mouse over a bar show the detailed values of that bar. \textit{Note: This is not an effective visualization for the Task. It is purely illustrative for the amount of detail expected.}}
+% \label{fig:exampledetailedsketch}
+% \end{figure}
+
+% \textbf{Advantages}
+% Write about the advantage of this approach for Task 1 and dataset.
+
+% \textbf{Disadvantages}
+% Write about the disadvantage of this approach for Task 1 and dataset.
+
+% \textbf{Chosen sketch}
+% I have chosen sketch X as the sketch to be implemented. Argue why this sketch was the most suitable one for Task 1 and dataset.
+
+% \subsection{Implementation}
+% Describe what code you used from where, and how it has been adapted to match to your sketch to better suit that dataset and Task 1.
+
+% \subsection{Performing task 1}
+% Description with accompanying relevant images demonstrating how the Task can be resolved.
+% %In case you did not complete it fully, show here how far you got with the implementation.
+
+% \subsection{Self Reflection}
+% Fill in the table with your expected point total. Write down what you believe is missing.
+
+% \begin{table}[b]{
+%     \begin{tabular}{|m{0.08\linewidth}|m{0.82\linewidth}|}
+%     \hline
+%     \rowcolor[HTML]{EFEFEF} 
+%     Points & Sub component\\ \hline
+%     \rowcolor[HTML]{DAE8FC} \hfill ? & There are at least 10 different rough sketches of nD visualizations that could potentially solve Task 1. \\ \hline
+%     \rowcolor[HTML]{EFEFEF} \hfill ? & There are at least 3 different rough sketches of nD visualizations not shown directly in the lecture that could potentially solve Task 1.\\ \hline
+%     \rowcolor[HTML]{DAE8FC} \hfill ? & The three different detailed sketches can solve Task 1.\\ \hline
+%     \rowcolor[HTML]{EFEFEF} \hfill ? & The detailed sketches could be implemented without confusion by a third-party. \\ \hline
+%     \rowcolor[HTML]{DAE8FC} \hfill ? & The tradeoffs of the detailed sketches for Task 1 are discussed well.\\ \hline
+%     \rowcolor[HTML]{EFEFEF} \hfill ? & The chosen visualization sketch can solve Task 1 well. \\ \hline
+%     \rowcolor[HTML]{DAE8FC} \hfill ? & It is well argued why the chosen visualization sketch was chosen.\\ \hline
+%     \rowcolor[HTML]{EFEFEF} \hfill ? & The final visualization sketch is fully implemented and suitable for Task 1. \\ \hline
+%     \rowcolor[HTML]{DAE8FC} \hfill ? & Labels, colors and other design elements have been included in the implementation and are suitable.\\ \hline
+%     \rowcolor[HTML]{EFEFEF} \hfill ? & Interactivity for filtering and selecting variables has been built into the visualization and is fully functional\\ \hline
+%     \rowcolor[HTML]{DAE8FC} \hfill ? & Task 1 has been performed well with the implemented visualization.\\ \hline
+%     \rowcolor[HTML]{EFEFEF} \hfill ? & You have self-reflected on this rubric, and filled in your expected amount of points for each sub component.\\ \hline
+%     \end{tabular}%
+%     }
+% \end{table}
+
+% %
+% % Week 3
+% %
+% \section{Spatial visualization}
+
+% \subsection{Spatial sketches}
+% Insert all sketches with very brief explanations of the ideas.
+
+% \subsection{Best 3 sketches}
+% Insert the best 3 sketches and discuss their advantages and disadvantages for the task and dataset. Can use \autoref{fig:exampledetailedsketch} to reference them by label.
+
+% \textbf{Advantages}
+% Write about the advantage of this approach for Task 2 and dataset.
+
+% \textbf{Disadvantages}
+% Write about the disadvantage of this approach for Task 2 and dataset.
+
+% \textbf{Chosen sketch}
+% Argue why this sketch was the most suitable one for Task 2 and dataset.
+
+% \textbf{Implementation}
+% Describe what code you used from where, and how it has been adapted to match to your sketch to better suit that dataset and task.
+
+% \subsection{Performing Task 2}
+% Description with accompanying relevant images demonstrating how Task 2 can be resolved.
+% %In case you did not complete it fully, show here how far you got with the implementation.
+
+% %
+% % Week 4
+% %
+% \section{Linked Clustering}
+
+% \subsection{Rough Interaction to Multivariate sketches}
+% Insert your rough sketches and argue which one is most suitable for Task 3 and the dataset.
+
+% \subsection{Rough Interaction to Spatial sketches}
+% Insert your rough sketches and argue which one is most suitable for Task 3 and the dataset.
+
+% \subsection{K-means Interactions}
+% Insert your rough sketches and argue which one is most suitable for Task 3 and the dataset.
+
+% \subsection{Self Reflection}
+% Fill in the table with your expected point total. Write down what you believe is missing.
+
+% \begin{table}[b]{
+%     \begin{tabular}{|m{0.08\linewidth}|m{0.82\linewidth}|}
+%     \hline
+%     \rowcolor[HTML]{EFEFEF} 
+%     Points & Sub component \\ \hline
+%     \rowcolor[HTML]{DAE8FC} \hfill ? & There are at least 10 different rough sketches of spatial visualizations that could potentially solve Task 2. \\ \hline
+%     \rowcolor[HTML]{EFEFEF} \hfill ? & There are at least 3 different sketches of spatial visualizations not shown directly in the lecture that could potentially solve Task 2. \\ \hline
+%     \rowcolor[HTML]{DAE8FC} \hfill ? & The three different detailed sketches can solve Task 2.\\ \hline
+%     \rowcolor[HTML]{EFEFEF} \hfill ? & The detailed sketches could be implemented without confusion by a third-party. \\ \hline
+%     \rowcolor[HTML]{DAE8FC} \hfill ? & The tradeoffs of the detailed sketches for Task 2 are discussed well.\\ \hline
+%     \rowcolor[HTML]{EFEFEF} \hfill ? & The chosen visualization sketch can solve Task 2 well. \\ \hline
+%     \rowcolor[HTML]{DAE8FC} \hfill ? & It is well argued why the chosen visualization sketch was chosen.\\ \hline
+%     \rowcolor[HTML]{EFEFEF} \hfill ? & The final visualization sketch is fully implemented and suitable for Task 2. \\ \hline
+%     \rowcolor[HTML]{DAE8FC} \hfill ? & Labels, colors and other design elements have been included in the implementation and are suitable.\\ \hline
+%     \rowcolor[HTML]{EFEFEF} \hfill ? & Interactivity for filtering and selecting variables, \textbf{and selecting spatial areas} has been built into the visualization, is fully functional and has low cost of interaction. \\ \hline
+%     \rowcolor[HTML]{DAE8FC} \hfill ? & Task 2 has been performed well with the implemented visualization.\\ \hline
+%     \rowcolor[HTML]{EFEFEF} \hfill ? & You have self-reflected on this rubric, and filled in your expected amount of points for each sub component.\\ \hline
+%     \end{tabular}%
+%     }
+% \end{table}
+
+% \subsection{Implementation}
+% Describe what code you used from where, and how it has been adapted to match to your sketch to better suit that dataset and Task 3.
+
+% \subsection{Resolving Task 3}
+% Description with accompanying relevant images demonstrating how Task 3 can be resolved.
+% %In case you did not complete it fully, show here how far you got with the implementation.
+
+% \subsection{Self Reflection}
+% Fill in the table with your expected point total. Write down what you believe is missing.
+
+% \begin{table}[h!]{
+%     \begin{tabular}{|m{0.08\linewidth}|m{0.82\linewidth}|}
+%     \hline
+%     \rowcolor[HTML]{EFEFEF} 
+%     Points & Sub component \\ \hline
+%     \rowcolor[HTML]{DAE8FC} \hfill 2 & There are at least 3 different rough sketches of how to link the output of the clustering to the nD visualization. \\ \hline
+%     \rowcolor[HTML]{EFEFEF} \hfill 1 & The chosen interaction of the output of the clustering to the nD visualization is well argued for. \\ \hline
+%     \rowcolor[HTML]{DAE8FC} \hfill 2 & There are at least 3 different rough sketches of how to link the output of the clustering to the spatial visualization. \\\hline
+%     \rowcolor[HTML]{EFEFEF} \hfill 1 & The chosen interaction of the output of the clustering to the spatial visualization is well argued for. \\ \hline
+%     \rowcolor[HTML]{DAE8FC} \hfill 2 & There are at least 3 different rough sketches of how to interact with k-means. \\ \hline
+%     \rowcolor[HTML]{EFEFEF} \hfill 1 & The chosen interaction with k-means is well argued for. \\ \hline
+%     \rowcolor[HTML]{DAE8FC} \hfill 5 & The final visualization sketches are fully implemented and are suitable for Task 3. \\ \hline
+%     \rowcolor[HTML]{DAE8FC} \hfill 4 & The clustering algorithm can be interacted with in a suitable manner. \\ \hline
+%     \rowcolor[HTML]{EFEFEF} \hfill 4 & The clustering is linked well to the multidimensional visualization through interactions. \\ \hline
+%     \rowcolor[HTML]{DAE8FC} \hfill 4 & The clustering is linked well to the spatial visualization through interactions. \\ \hline
+%     \rowcolor[HTML]{DAE8FC} \hfill 3 & Task 3 has been performed with the implemented visualization. \\ \hline
+%     \rowcolor[HTML]{EFEFEF} \hfill 1 & You have self-reflected on this rubric, and filled in your expected amount of points for each sub component. \\ \hline
+%     \end{tabular}%
+%     }
+% \end{table}
+
+\end{document}

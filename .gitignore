@@ -1,3 +1,19 @@
-# raw datasets
-dist/data/80305ned_TypedDataSet_06112025_170745.csv
-dist/data/wijkenbuurten_2023_v2.gpkg
+# project manual
+Data Visualization Project.pdf
+
+# datasets
+data/80305ned_TypedDataSet_06112025_170745.csv
+data/wijkenbuurten_2023_v2.gpkg
+data/dataset_clean.json
+
+# node.js
+node_modules
+
+# latex
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.synctex.gz
+*.synctex(busy)
+*.out

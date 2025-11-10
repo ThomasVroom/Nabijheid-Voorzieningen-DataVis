@@ -1,6 +1,25 @@
-To get started with coding:
+# 'Nabijheid Voorzieningen' Data Visualization
 
-1) Install nodejs https://nodejs.org/en/download.
-2) Open op Visual Studio Code, open the project folder, and open a terminal within Visual Studio Code.
-3) In the terminal, run `npm install" to install all required dependencies. These include d3, typescript, and a typescript transpiler.
-4) In the terminal, run `npm run start` start to automatically transpile and bundle the code as you go. This you need to execute each time you start and close Visual Studio Code, all other steps only need to be done once
+The [Nabijheid voorzieningen; afstand locatie, regionale cijfers](https://opendata.cbs.nl/#/CBS/nl/dataset/80305ned/table?ts=1762443943511) dataset from the CBS contains information on average distances to common facilities such as hospitals, schools, train stations etc. for Dutch municipalities.
+This project creates a visualization of a subset of the 2023 version of this dataset using the [D3](https://d3js.org/) JavaScript library.
+The following features are considered:
+
+- Population
+- Avg. Distance to Closest GP
+- Avg. Distance to Closest Pharmacy
+- Avg. Distance to Closest Hospital
+- Avg. Distance to Closest Supermarket
+- Avg. Distance to Closest Primary School
+- Avg. Distance to Closest High School
+- Avg. Distance to Closest Highway
+- Avg. Distance to Closest Train Station
+- Avg. Distance to Closest Fire Station
+
+Spatial data is taken from the [Wijk- en buurtkaart 2023](https://www.cbs.nl/nl-nl/dossier/nederland-regionaal/geografische-data/wijk-en-buurtkaart-2023) shape file from the CBS.
+The final processed dataset consists of 13 features and 342 municipalities (see `/data`).
+
+### Usage
+To start the visualization, run `npm start` in the terminal.
+
+### About
+Developed by Thomas Vroom, Maastricht University (2025), as part of the KEN4224 Data Visualization course.
