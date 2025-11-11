@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  background: #fafafa;
+  background: white;
 }
 
 svg {
@@ -9,10 +9,9 @@ svg {
 }
 
 path {
-  fill: #a8dadc;
-  stroke: #1d3557;
+  fill: lightskyblue;
+  stroke: navy;
   stroke-width: 0.5px;
-  transition: fill 0.2s;
 }
 
 path:hover {
