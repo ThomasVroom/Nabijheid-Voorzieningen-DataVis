@@ -8,6 +8,6 @@ const svg = d3.select("#canvas")
     .attr("width", width)
     .attr("height", height);
 
-// basic GeoJSON visualization
-import { visGeoJSON } from "./basic_geovis.js";
-visGeoJSON(svg, width, height);
+// import and load visualization
+import { plotSVG } from "./multivariate_vis.js";
+plotSVG(svg, width, height);
