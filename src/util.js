@@ -6,9 +6,9 @@ export function loadGeoJSON(path) {
 };
 
 // basic spatial visualization with highlightable areas
-export function plotSVG(svg, width, height) {
+export function plotSVG(svg, width, height, margin) {
     loadGeoJSON("data/dataset_clean.json").then(data => {
-        const projection = d3.geoMercator().fitSize([width, height], data);
+        const projection = d3.geoMercator().fitSize([width - margin.left - margin.right, height - margin.top - margin.bottom], data);
         const path = d3.geoPath().projection(projection);
 
         svg.selectAll("path")
