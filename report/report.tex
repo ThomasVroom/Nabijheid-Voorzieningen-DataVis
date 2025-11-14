@@ -45,104 +45,115 @@ The dataset was preprocessed in the following way:
 \noindent
 The final dataset has 13 columns (features) and 342 rows (spatial areas; one per municipality).
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 %
 % Week 2
 %
-% \section{Multivariate visualization}
+\section{Multivariate visualization} \noindent
+The first task is as follows: \textit{"Compare the features of one selected spatial area to a set of other selected spatial areas"}.
+For the set of spatial areas I selected all municipalities from the province \textit{Limburg}, with the goal of comparing them in a customizable subset of features.
 
-% \subsection{Multivariate sketches}
-% Insert all sketches with very brief explanations of the ideas.
+\subsection{Multivariate sketches} \noindent
+The first sketches for solving this task can be seen in Figure \ref{fig:task1-sheet1}.
+If the image is not large enough, you can also find the original scan in the source code under \textit{report/images/}.
 
-% \begin{figure}[h]
-%     \centering
-%     \includegraphics[width=0.45\linewidth]{images/examplesketch.jpg}
-%     \caption{Example simple sketch and caption:"Shows the data via juxtaposed bar charts and textures."\label{fig:examplesketch}}
-% \end{figure}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/task1-sheet1.png}
+    \caption{First sketches for Task 1.\label{fig:task1-sheet1}}
+\end{figure}
 
-% \subsection{Best 3 sketches}
-% Insert the best 3 sketches and discuss their advantages and disadvantages for Task 1 and the dataset. You can use \autoref{fig:exampledetailedsketch} to reference them by label.
+\subsection{Best 3 sketches} \noindent
+The first sketch considered can be seen in Figure \ref{fig:task1-sheet2}.
+The \textbf{advantages} of this design include that it is the easiest to understand and use out of all my ideas, allows for a lot of customization, and allows for comparison of specific features for specific areas at a glance.
+The \textbf{disadvantages} of this design include that it does not scale well with more areas and / or features, with more of either potentially leading to an overwhelming chart.
 
-% \begin{figure}[h]
-% \centering
-% \includegraphics[width=\linewidth]{images/exampledetailedsketch.pdf}
-% \caption{Example detailed sketch and description for the example simple sketch. Each barchart depicts one postcode, with the barcharts positioned out in axis-aligned rows. The barchart shows the values of the selected variables using the y-position. Percentage values are kept as is, while all other variables are min-max normalized towards the minimal and maximum value present in the entire dataset. The selected variables (up to 4) are double encoded via the x-position and a texture. Possible textures are left-hatched, right-hatched, no hatch and crosshatched. The variables can be selected by clicking on one of the distributions charts present in the template. Hovering with the mouse over a bar show the detailed values of that bar. \textit{Note: This is not an effective visualization for the Task. It is purely illustrative for the amount of detail expected.}}
-% \label{fig:exampledetailedsketch}
-% \end{figure}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/task1-sheet2.png}
+    \caption{The first in-depth sketch for Task 1. This design shows a grouped barchart with a shared y-axis, customizable selection of features through a drop-down menu, and highlightable bars.\label{fig:task1-sheet2}}
+\end{figure}
 
-% \textbf{Advantages}
-% Write about the advantage of this approach for Task 1 and dataset.
+\noindent
+The second sketch considered can be seen in Figure \ref{fig:task1-sheet3}.
+The \textbf{advantages} of this design include that it scales well with more areas and columns (up to a certain point), and it offers a lot of flexibility in what to visualize and how to do it.
+The \textbf{disadvantages} of this design include that you cannot find specific areas at a glance, and it is also difficult to compare specific areas.
 
-% \textbf{Disadvantages}
-% Write about the disadvantage of this approach for Task 1 and dataset.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/task1-sheet3.png}
+    \caption{The second in-depth sketch for Task 1. This design shows a parallel coordinates plot with curved lines, highlightable areas, customizable color-encoding through a drop-down menu, and customizable selection of features through a drop-down menu.\label{fig:task1-sheet3}}
+\end{figure}
 
-% \textbf{Chosen sketch}
-% I have chosen sketch X as the sketch to be implemented. Argue why this sketch was the most suitable one for Task 1 and dataset.
+\noindent
+The third sketch considered can be seen in Figure \ref{fig:task1-sheet4}.
+The \textbf{advantages} of this design include that it adds new information (area under the line), scales well with more areas, and offers a lot of flexibility in what to visualize and how to do it.
+The \textbf{disadvantages} of this design include that it does not scale well with more columns, can feel very overwhelming, and is potentially more difficut to code.
 
-% \subsection{Implementation}
-% Describe what code you used from where, and how it has been adapted to match to your sketch to better suit that dataset and Task 1.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/task1-sheet4.png}
+    \caption{The third in-depth sketch for Task 1. This design shows a radar chart with areas as lines, customizable selection of features through a drop-down menu, customizable color-encoding through a drop-down menu, and highlightable lines with colored-in areas.\label{fig:task1-sheet4}}
+\end{figure}
 
-% \subsection{Performing task 1}
-% Description with accompanying relevant images demonstrating how the Task can be resolved.
-% %In case you did not complete it fully, show here how far you got with the implementation.
+\noindent
+In the end I opted for the second design, as it strikes a good balance with the flexibility of the first design, while not being as overwhelming to use as the third design.
+The disadvantage of it being difficult to compare specific areas should be mitigated in the future by allowing customizable area selection, and since parallel coordinate plots are quite common in multivariate visualization there should be enough resources online to realize the design in practice.
 
-% \subsection{Self Reflection}
-% Fill in the table with your expected point total. Write down what you believe is missing.
+\subsection{Implementation} \noindent
+The full source code can be found in the attached .zip file.
+The code for Task 1 can mostly be found in \textit{src/multivariate\_vis.js}.
+As described in there, I used existing code from the following sources: \href{https://d3-graph-gallery.com/graph/parallel_basic.html}{[1]} \href{https://d3-graph-gallery.com/graph/parallel_custom.html}{[2]} \href{https://observablehq.com/@d3/color-legend}{[3]}.
+Unfortunately, there are still some things missing that will be implemented in the next week:
 
-% \begin{table}[b]{
-%     \begin{tabular}{|m{0.08\linewidth}|m{0.82\linewidth}|}
-%     \hline
-%     \rowcolor[HTML]{EFEFEF} 
-%     Points & Sub component\\ \hline
-%     \rowcolor[HTML]{DAE8FC} \hfill ? & There are at least 10 different rough sketches of nD visualizations that could potentially solve Task 1. \\ \hline
-%     \rowcolor[HTML]{EFEFEF} \hfill ? & There are at least 3 different rough sketches of nD visualizations not shown directly in the lecture that could potentially solve Task 1.\\ \hline
-%     \rowcolor[HTML]{DAE8FC} \hfill ? & The three different detailed sketches can solve Task 1.\\ \hline
-%     \rowcolor[HTML]{EFEFEF} \hfill ? & The detailed sketches could be implemented without confusion by a third-party. \\ \hline
-%     \rowcolor[HTML]{DAE8FC} \hfill ? & The tradeoffs of the detailed sketches for Task 1 are discussed well.\\ \hline
-%     \rowcolor[HTML]{EFEFEF} \hfill ? & The chosen visualization sketch can solve Task 1 well. \\ \hline
-%     \rowcolor[HTML]{DAE8FC} \hfill ? & It is well argued why the chosen visualization sketch was chosen.\\ \hline
-%     \rowcolor[HTML]{EFEFEF} \hfill ? & The final visualization sketch is fully implemented and suitable for Task 1. \\ \hline
-%     \rowcolor[HTML]{DAE8FC} \hfill ? & Labels, colors and other design elements have been included in the implementation and are suitable.\\ \hline
-%     \rowcolor[HTML]{EFEFEF} \hfill ? & Interactivity for filtering and selecting variables has been built into the visualization and is fully functional\\ \hline
-%     \rowcolor[HTML]{DAE8FC} \hfill ? & Task 1 has been performed well with the implemented visualization.\\ \hline
-%     \rowcolor[HTML]{EFEFEF} \hfill ? & You have self-reflected on this rubric, and filled in your expected amount of points for each sub component.\\ \hline
-%     \end{tabular}%
-%     }
-% \end{table}
+\begin{itemize}
+    \item Dragging to select multiple areas.
+    \item Filtering between features.
+\end{itemize}
 
-% %
-% % Week 3
-% %
+\subsection{Performing task 1} \noindent
+Screenshots of the visualization can be found in Figures \ref{fig:task1-screen1} and \ref{fig:task1-screen2}.
+Figure \ref{fig:task1-screen1} shows the parallel coordinates plot with 9 axes for the 9 different features.
+For ease of comparison, all axes share the same units and scale.
+The color-encoding of the lines can be customized by a drop-down menu in the top left.
+Hovering over a line highlights it and shows the name of the area in the form of a tooltip (see Figure \ref{fig:task1-screen2}).
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.9\linewidth]{images/task1-screenshot1.jpeg}
+    \caption{A screenshot of the implemented visualization for Task 1.\label{fig:task1-screen1}}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.9\linewidth]{images/task1-screenshot2.png}
+    \caption{A screenshot of the implemented visualization for Task 1, highlighting the entry for \textit{Maastricht}.\label{fig:task1-screen2}}
+\end{figure}
+
+\subsection{Self Reflection}
+
+\begin{table}[ht]
+    \begin{tabular}{|m{0.08\linewidth}|m{0.82\linewidth}|}
+    \hline
+    \rowcolor[HTML]{EFEFEF} 
+    Points & Sub component\\ \hline
+    \rowcolor[HTML]{DAE8FC} \hfill 2 / 2 & There are at least 10 different rough sketches of nD visualizations that could potentially solve Task 1. \\ \hline
+    \rowcolor[HTML]{EFEFEF} \hfill 2 / 2 & There are at least 3 different rough sketches of nD visualizations not shown directly in the lecture that could potentially solve Task 1.\\ \hline
+    \rowcolor[HTML]{DAE8FC} \hfill 2 / 2 & The three different detailed sketches can solve Task 1.\\ \hline
+    \rowcolor[HTML]{EFEFEF} \hfill 2 / 2 & The detailed sketches could be implemented without confusion by a third-party. \\ \hline
+    \rowcolor[HTML]{DAE8FC} \hfill 2 / 2 & The tradeoffs of the detailed sketches for Task 1 are discussed well.\\ \hline
+    \rowcolor[HTML]{EFEFEF} \hfill 1 / 1 & The chosen visualization sketch can solve Task 1 well. \\ \hline
+    \rowcolor[HTML]{DAE8FC} \hfill 2 / 2 & It is well argued why the chosen visualization sketch was chosen.\\ \hline
+    \rowcolor[HTML]{EFEFEF} \hfill 3 / 5 & The final visualization sketch is fully implemented and suitable for Task 1. \\ \hline
+    \rowcolor[HTML]{DAE8FC} \hfill 4 / 4 & Labels, colors and other design elements have been included in the implementation and are suitable.\\ \hline
+    \rowcolor[HTML]{EFEFEF} \hfill 0 / 5 & Interactivity for filtering and selecting variables has been built into the visualization and is fully functional\\ \hline
+    \rowcolor[HTML]{DAE8FC} \hfill 2 / 2 & Task 1 has been performed well with the implemented visualization.\\ \hline
+    \rowcolor[HTML]{EFEFEF} \hfill 1 / 1 & You have self-reflected on this rubric, and filled in your expected amount of points for each sub component.\\ \hline
+    \end{tabular}%
+\end{table}
+
+%
+% Week 3
+%
 % \section{Spatial visualization}
 
 % \subsection{Spatial sketches}
