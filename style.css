@@ -31,3 +31,18 @@ svg {
   font-size: 15px;
   fill: black;
 }
+
+#chart-container {
+  position: relative;
+  width: 100%;
+}
+
+#filtering {
+  position: absolute;
+  top: 20px;
+  z-index: 10;
+}
+
+.checkbox-item {
+  margin-bottom: 2.5px;
+}
