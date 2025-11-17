@@ -19,6 +19,9 @@ export function plotSVG(svg, width, height, margin) {
             // tooltip for viewing area names
             const tooltip = d3.select("#tooltip").attr("class", "tooltip");
 
+            // brushing for highlighting multiple lines
+            const activeBrushes = {};
+
             // find the maximum value of the entire selection
             let col_max = [];
             for (let dim of columns) {
@@ -44,7 +47,7 @@ export function plotSVG(svg, width, height, margin) {
             function path(d) {
                 return d3.line().curve(d3.curveMonotoneX)(columns.map(p => [x(p), y[p](d[p])]));
             }
-            svg.selectAll("path")
+            const linePaths = svg.selectAll("path")
                 .data(data)
                 .join("path")
                 .attr("d", path)
@@ -91,22 +94,88 @@ export function plotSVG(svg, width, height, margin) {
             });
             colorSelect.property('value', color_feature);
 
+            // brushing logic
+            function updateLineHighlighting() {
+                linePaths
+                    .attr("opacity", d => {
+                        // for every active brush, check if the value is inside the interval
+                        for (const dim in activeBrushes) {
+                            const [y0, y1] = activeBrushes[dim];
+                            const py = y[dim](d[dim]);
+                            if (py < y0 || py > y1) {
+                                return 0.2; // faded
+                            }
+                        }
+                        return 1; // highlight
+                    })
+                    .attr("stroke-width", d => {
+                        for (const dim in activeBrushes) {
+                            const [y0, y1] = activeBrushes[dim];
+                            const py = y[dim](d[dim]);
+                            if (py < y0 || py > y1) return 1; // shrink
+                        }
+                        return 2.5;
+                    });
+            }
+            function brushed(dimension) {
+                return function(event) {
+                    if (event.selection) {
+                        const [y0, y1] = event.selection;
+                        activeBrushes[dimension] = [y0, y1];
+                    } else {
+                        delete activeBrushes[dimension];
+                    }
+                    updateLineHighlighting();
+                };
+            }
+
             // vertical axes
-            svg.selectAll(".dimension")
+            const axisGroup = svg.selectAll(".dimension")
                 .data(columns)
                 .join("g")
                 .attr("class", "dimension")
-                .attr("transform", d => `translate(${x(d)})`)
-                .each(function(d) {
-                    const g = d3.select(this).call(d3.axisLeft(y[d]));
-                    g.selectAll(".domain").attr("class", "axis"); // axis lines
-                    g.selectAll(".tick line").attr("class", "axis"); // tick lines
-                })
-                .append("text") // axis labels
+                .attr("transform", d => `translate(${x(d)})`)    
+            axisGroup.each(function(d) {
+                const g = d3.select(this).call(d3.axisLeft(y[d]));
+                g.selectAll(".domain").attr("class", "axis"); // axis lines
+                g.selectAll(".tick line").attr("class", "axis"); // tick lines
+            })
+            axisGroup.append("text") // axis labels
                 .style("text-anchor", "middle")
                 .attr("y", height - margin.bottom + 30)
                 .attr("class", "axis-label")
                 .text(d => d.replace("Avg. Distance to ", ""));
+            axisGroup.append("g") // brushing
+                .attr("class", "brush")
+                .each(function (d) {
+                    const brush = d3.brushY()
+                        .extent([[-10, margin.top], [10, height - margin.bottom]])
+                        .on("brush end", brushed(d));
+                    const gBrush = d3.select(this).call(brush);
+                    // handles
+                    const handle = gBrush.selectAll(".handle")
+                        .data([{ type: "n" }, { type: "s" }])
+                        .join("line")
+                        .attr("class", "handle")
+                        .attr("stroke", "#333")
+                        .attr("stroke-width", 4)
+                        .attr("stroke-linecap", "round");
+                    function updateHandles(selection) {
+                        const [y0, y1] = selection; // [top, bottom]
+                        handle
+                            .attr("x1", -10)
+                            .attr("x2", 10)
+                            .attr("y1", d => (d.type === "n" ? y0 : y1))
+                            .attr("y2", d => (d.type === "n" ? y0 : y1));
+                    }
+                    const oBrushed = brushed(d);
+                    function wrappedBrush(event) {
+                        if (event.selection) updateHandles(event.selection);
+                        oBrushed(event);
+                    }
+                    gBrush.call(brush.on("brush end", wrappedBrush));
+                });
+
 
             // general y-axis label
             svg.append("text")
