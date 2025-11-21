@@ -9,14 +9,25 @@
   <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
-  <div id="chart-container">
-    <label for="color-select">Color by:</label>
-    <select id="color-select"></select>
-    <div id="filtering"></div>
-    <div id="canvas"></div>
-  </div>
-  <div id="tooltip" style="opacity: 0; pointer-events: none;"></div>
+  <div id="page-layout">
 
-  <script type="module" src="src/main.js"></script>
+    <div id="controls">
+      <label for="color-select">Color by:</label>
+      <select id="color-select"></select>
+      <div id="filtering"></div>
+    </div>
+
+    <label for="title">Average Distance to ...</label>
+
+    <div id="plots">
+      <div id="canvas-map"></div>
+      <div id="canvas-legend"></div>
+      <div id="canvas-plot"></div>
+    </div>
+
+  </div>
+
+  <div id="tooltip" style="opacity: 0; pointer-events: none;"></div>
+  <script type="module" src="script.js"></script>
 </body>
 </html>

@@ -1,11 +1,48 @@
 body {
   margin: 0;
-  background: white;
+  font-family: sans-serif;
+}
+
+#page-layout {
+  position: relative;
+  width: 100%;
+}
+
+#controls {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 10px 12px;
+  border-radius: 6px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.2);
+}
+
+#page-layout > label[for="title"] {
+  display: block;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#plots {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+}
+
+#plots > div {
+  height: 100%;
+  flex-shrink: 0;
 }
 
 svg {
-  width: 100vw;
-  height: 100vh;
+  display: block;
 }
 
 .tooltip {
@@ -30,19 +67,4 @@ svg {
 .axis-label {
   font-size: 15px;
   fill: black;
-}
-
-#chart-container {
-  position: relative;
-  width: 100%;
-}
-
-#filtering {
-  position: absolute;
-  top: 20px;
-  z-index: 10;
-}
-
-.checkbox-item {
-  margin-bottom: 2.5px;
 }
