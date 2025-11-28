@@ -1,3 +1,5 @@
+import {kMeans} from "./kMeans.js";
+
 // code from:
 // - https://observablehq.com/@d3/color-legend
 // - https://d3-graph-gallery.com/graph/parallel_basic.html
@@ -5,7 +7,7 @@
 // - https://d3-graph-gallery.com/graph/backgroundmap_basic.html
 
 const margin = {
-    top: 0,
+    top: 5,
     left: 50,
     right: 40,
     bottom: 50
@@ -24,6 +26,14 @@ const mapWidth = 500;
 const legendWidth = 40;
 const plotWidth = 750;
 const height = 630;
+
+// slider for k-means clustering
+const kLabel = d3.select("#n-clusters");
+const kSlider = d3.select("#k");
+kSlider.on("input", function() {
+    kLabel.text("# of clusters: " + this.value);
+});
+let kMeansClusters = {};
 
 // select canvasses, append svg
 const svg_map = d3.select("#canvas-map")
@@ -48,9 +58,9 @@ d3.json("data/dataset_limburg.json").then(data => {
 
     const geoData = data;
     const jsonData = data.features.map(d => d.properties);
+    jsonData.map((r) => {r["Cluster"] = -1;}); // init new column
 
-    let color; // global for plot & map
-    function updateColor(feature) {
+    function updateColor(color, feature) {
         svg_plot.selectAll(".pc-line").attr("stroke", d => color(+d[feature]));
         svg_map.selectAll(".region")
             .on("mousedown", function(event, d) { // gray out (toggle)
@@ -139,7 +149,7 @@ d3.json("data/dataset_limburg.json").then(data => {
         });
 
     // function for plotting with a filtered set of columns
-    function plot_columns(columns, color_feature) {
+    function plot_columns(columns, color_feature, k) {
         // brushing for highlighting multiple lines
         const activeBrushes = {};
 
@@ -153,9 +163,17 @@ d3.json("data/dataset_limburg.json").then(data => {
         // y-scale
         const y = {};
         for (let dim of columns) {
-            y[dim] = d3.scaleLinear()
-                .domain([0, maximum])
-                .range([height - margin.bottom, margin.top]);
+            if (dim === "Cluster") {
+                // categorical scale
+                y[dim] = d3.scalePoint()
+                    .domain(d3.range(1, k + 1).reverse())
+                    .range([margin.top, height - margin.bottom]);
+            } else {
+                // numeric scale
+                y[dim] = d3.scaleLinear()
+                    .domain([0, maximum])
+                    .range([height - margin.bottom, margin.top]);
+            }
         }
 
         // x-scale
@@ -163,9 +181,20 @@ d3.json("data/dataset_limburg.json").then(data => {
             .range([margin.left, plotWidth - margin.right])
             .domain(columns);
 
+        // k-means clustering
+        if (!kMeansClusters[k]) { // cache previous clusters
+            kMeansClusters[k] = kMeans(jsonData, columns, k, []);
+        }
+        let clusterAssignments = kMeansClusters[k];
+        jsonData.map((r, i) => {
+            r["Cluster"] = clusterAssignments[i] + 1;
+        });
+
         // lines
         function path(d) {
-            return d3.line().curve(d3.curveMonotoneX)(columns.map(p => [x(p), y[p](d[p])]));
+            return d3.line().curve(d3.curveMonotoneX)(columns.map(p => {
+                return [x(p), y[p](p === "Cluster" ? +d[p] : d[p])];
+            }));
         }
         const linePaths = svg_plot.selectAll("path")
             .data(jsonData)
@@ -211,13 +240,22 @@ d3.json("data/dataset_limburg.json").then(data => {
             });
 
         // colors
-        color = d3.scaleSequential()
-            .domain([0, maximum])
-            .interpolator(d3.interpolateRgb("purple", "orange"));
+        let color;
+        if (color_feature === "Cluster") {
+            // categorical color scale for clusters
+            color = d3.scaleOrdinal()
+                .domain(d3.range(1, k + 1))
+                .range(d3.schemeCategory10);
+        } else {
+            // numeric sequential scale
+            color = d3.scaleSequential()
+                .domain([0, maximum])
+                .interpolator(d3.interpolateRgb("purple", "orange"));
+        }
         if (!columns.includes(color_feature)) {
             color_feature = columns[0]; // failsafe: use first column
         }
-        updateColor(color_feature); // default color
+        updateColor(color, color_feature); // default color
 
         // drop down menu for color switching
         const colorSelect = d3.select("#color-select");
@@ -227,7 +265,20 @@ d3.json("data/dataset_limburg.json").then(data => {
             .attr("value", d => d)
             .text(d => d.replace("Avg. Distance to ", ""));
         colorSelect.on("change", function() {
-            updateColor(this.value);
+            if (this.value === "Cluster") {
+                // categorical color scale for clusters
+                color = d3.scaleOrdinal()
+                    .domain(d3.range(1, k + 1))
+                    .range(d3.schemeCategory10);
+                svg_legend.selectAll("*").remove(); // disable legend
+            } else {
+                // numeric sequential scale
+                color = d3.scaleSequential()
+                    .domain([0, maximum])
+                    .interpolator(d3.interpolateRgb("purple", "orange"));
+                createLegend();
+            }
+            updateColor(color, this.value);
         });
         colorSelect.property('value', color_feature);
 
@@ -238,7 +289,7 @@ d3.json("data/dataset_limburg.json").then(data => {
                     // for every active brush, check if the value is inside the interval
                     for (const dim in activeBrushes) {
                         const [y0, y1] = activeBrushes[dim];
-                        const py = y[dim](d[dim]);
+                        const py = y[dim](dim === "Cluster" ? +d[dim] : d[dim]);
                         if (py < y0 || py > y1) {
                             return 0.2; // faded
                         }
@@ -248,7 +299,7 @@ d3.json("data/dataset_limburg.json").then(data => {
                 .attr("stroke-width", d => {
                     for (const dim in activeBrushes) {
                         const [y0, y1] = activeBrushes[dim];
-                        const py = y[dim](d[dim]);
+                        const py = y[dim](dim === "Cluster" ? +d[dim] : d[dim]);
                         if (py < y0 || py > y1) return 1; // shrink
                     }
                     return 2.5;
@@ -334,36 +385,39 @@ d3.json("data/dataset_limburg.json").then(data => {
             .text("Average Distance (km)");
 
         // legend
-        const legendHeight = height - margin.top - margin.bottom;
-        const legend_width = 15;
-        const linearGradient = svg_legend.append("defs").append("linearGradient")
-            .attr("id", "color-gradient")
-            .attr("x1", "0%")
-            .attr("x2", "0%")
-            .attr("y1", "100%")
-            .attr("y2", "0%");
-        for (let i = 0; i <= 1; i += 0.05) {
-            linearGradient.append("stop")
-                .attr("offset", i)
-                .attr("stop-color", color(i * maximum));
+        function createLegend() {
+            const legendHeight = height - margin.top - margin.bottom;
+            const legend_width = 15;
+            const linearGradient = svg_legend.append("defs").append("linearGradient")
+                .attr("id", "color-gradient")
+                .attr("x1", "0%")
+                .attr("x2", "0%")
+                .attr("y1", "100%")
+                .attr("y2", "0%");
+            for (let i = 0; i <= 1; i += 0.05) {
+                linearGradient.append("stop")
+                    .attr("offset", i)
+                    .attr("stop-color", color(i * maximum));
+            }
+            const legendGroup = svg_legend.append("g")
+            legendGroup.append("rect")
+                .attr("width", legend_width)
+                .attr("height", legendHeight)
+                .style("fill", `url(#color-gradient)`)
+                .attr("stroke", "cream")
+                .attr("stroke-width", 0.5);
+            const legendScale = d3.scaleLinear()
+                .domain([0, maximum])
+                .range([legendHeight, 0]);
+            const legendAxis = d3.axisRight(legendScale)
+                .ticks(6)
+                .tickSize(4);
+            legendGroup.append("g")
+                .attr("transform", `translate(${legend_width}, 0)`)
+                .call(legendAxis)
+                .call(g => g.select(".domain").remove());
         }
-        const legendGroup = svg_legend.append("g")
-        legendGroup.append("rect")
-            .attr("width", legend_width)
-            .attr("height", legendHeight)
-            .style("fill", `url(#color-gradient)`)
-            .attr("stroke", "cream")
-            .attr("stroke-width", 0.5);
-        const legendScale = d3.scaleLinear()
-            .domain([0, maximum])
-            .range([legendHeight, 0]);
-        const legendAxis = d3.axisRight(legendScale)
-            .ticks(6)
-            .tickSize(4);
-        legendGroup.append("g")
-            .attr("transform", `translate(${legend_width}, 0)`)
-            .call(legendAxis)
-            .call(g => g.select(".domain").remove());
+        if (color_feature !== "Cluster") createLegend();
     };
 
     // remove non-relevant columns
@@ -375,7 +429,7 @@ d3.json("data/dataset_limburg.json").then(data => {
     );
 
     // set initial columns
-    const columns_init = [columns_clean[0], columns_clean[1], columns_clean[2]];
+    const columns_init = [columns_clean[0], columns_clean[1], columns_clean[2], "Cluster"];
 
     // checkboxes for filtering
     d3.select("#filtering").selectAll("div")
@@ -391,10 +445,30 @@ d3.json("data/dataset_limburg.json").then(data => {
         svg_legend.selectAll("*").remove();
         plot_columns( // filtering
             Array.from(document.querySelectorAll(".feature-checkbox:checked")).map(d => d.value),
-            d3.select("#color-select").node().value // currently selected color
+            d3.select("#color-select").node().value, // currently selected color
+            +kSlider.node().value // number of clusters
+        );
+    });
+    kSlider.on("change", function() {
+        svg_plot.selectAll("*").remove(); // clear screen
+        svg_legend.selectAll("*").remove();
+        plot_columns( // filtering
+            Array.from(document.querySelectorAll(".feature-checkbox:checked")).map(d => d.value),
+            d3.select("#color-select").node().value, // currently selected color
+            +this.value // number of clusters
+        );
+    });
+    d3.select("#redo-clusters").on("click", function() {
+        kMeansClusters = {}; // reset clusters
+        svg_plot.selectAll("*").remove(); // clear screen
+        svg_legend.selectAll("*").remove();
+        plot_columns( // filtering
+            Array.from(document.querySelectorAll(".feature-checkbox:checked")).map(d => d.value),
+            d3.select("#color-select").node().value, // currently selected color
+            +kSlider.node().value // number of clusters
         );
     });
 
     // run the plotting code with all columns
-    plot_columns(columns_init, columns_init[0]);
+    plot_columns(columns_init, columns_init[0], 3);
 });
