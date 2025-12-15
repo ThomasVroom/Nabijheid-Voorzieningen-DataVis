@@ -53,6 +53,7 @@ const tooltip = d3.select("#tooltip")
     .attr("class", "tooltip");
 
 // load geojson data
+// change to `data/dataset_clean.json` to load full dataset
 d3.json("data/dataset_limburg.json").then(data => {
     console.log("loaded data:", data);
 

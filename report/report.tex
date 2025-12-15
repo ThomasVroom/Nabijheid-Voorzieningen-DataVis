@@ -56,44 +56,44 @@ For the set of spatial areas I selected all municipalities from the province \te
 The first sketches for solving this task can be seen in Figure \ref{fig:task1-sheet1}.
 If the image is not large enough, you can also find the original scan in the source code under \textit{report/images/}.
 
-% \begin{figure}[ht]
-%     \centering
-%     \includegraphics[width=0.75\linewidth]{images/task1-sheet1.png}
-%     \caption{First sketches for Task 1.\label{fig:task1-sheet1}}
-% \end{figure}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/task1-sheet1.png}
+    \caption{First sketches for Task 1.\label{fig:task1-sheet1}}
+\end{figure}
 
 \subsection{Best 3 sketches} \noindent
 The first sketch considered can be seen in Figure \ref{fig:task1-sheet2}.
 The \textbf{advantages} of this design include that it is the easiest to understand and use out of all my ideas, allows for a lot of customization, and allows for comparison of specific features for specific areas at a glance.
 The \textbf{disadvantages} of this design include that it does not scale well with more areas and / or features, with more of either potentially leading to an overwhelming chart.
 
-% \begin{figure}[ht]
-%     \centering
-%     \includegraphics[width=0.75\linewidth]{images/task1-sheet2.png}
-%     \caption{The first in-depth sketch for Task 1. This design shows a grouped barchart with a shared y-axis, customizable selection of features through a drop-down menu, and highlightable bars.\label{fig:task1-sheet2}}
-% \end{figure}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/task1-sheet2.png}
+    \caption{The first in-depth sketch for Task 1. This design shows a grouped barchart with a shared y-axis, customizable selection of features through a drop-down menu, and highlightable bars.\label{fig:task1-sheet2}}
+\end{figure}
 
 \noindent
 The second sketch considered can be seen in Figure \ref{fig:task1-sheet3}.
 The \textbf{advantages} of this design include that it scales well with more areas and columns (up to a certain point), and it offers a lot of flexibility in what to visualize and how to do it.
 The \textbf{disadvantages} of this design include that you cannot find specific areas at a glance, and it is also difficult to compare specific areas.
 
-% \begin{figure}[ht]
-%     \centering
-%     \includegraphics[width=0.75\linewidth]{images/task1-sheet3.png}
-%     \caption{The second in-depth sketch for Task 1. This design shows a parallel coordinates plot with curved lines, highlightable areas, customizable color-encoding through a drop-down menu, and customizable selection of features through a drop-down menu.\label{fig:task1-sheet3}}
-% \end{figure}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/task1-sheet3.png}
+    \caption{The second in-depth sketch for Task 1. This design shows a parallel coordinates plot with curved lines, highlightable areas, customizable color-encoding through a drop-down menu, and customizable selection of features through a drop-down menu.\label{fig:task1-sheet3}}
+\end{figure}
 
 \noindent
 The third sketch considered can be seen in Figure \ref{fig:task1-sheet4}.
 The \textbf{advantages} of this design include that it adds new information (area under the line), scales well with more areas, and offers a lot of flexibility in what to visualize and how to do it.
 The \textbf{disadvantages} of this design include that it does not scale well with more columns, can feel very overwhelming, and is potentially more difficut to code.
 
-% \begin{figure}[ht]
-%     \centering
-%     \includegraphics[width=0.75\linewidth]{images/task1-sheet4.png}
-%     \caption{The third in-depth sketch for Task 1. This design shows a radar chart with areas as lines, customizable selection of features through a drop-down menu, customizable color-encoding through a drop-down menu, and highlightable lines with colored-in areas.\label{fig:task1-sheet4}}
-% \end{figure}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/task1-sheet4.png}
+    \caption{The third in-depth sketch for Task 1. This design shows a radar chart with areas as lines, customizable selection of features through a drop-down menu, customizable color-encoding through a drop-down menu, and highlightable lines with colored-in areas.\label{fig:task1-sheet4}}
+\end{figure}
 
 \noindent
 In the end I opted for the second design, as it strikes a good balance with the flexibility of the first design, while not being as overwhelming to use as the third design.
@@ -111,43 +111,22 @@ The color-encoding of the lines can be customized by a drop-down menu in the top
 Hovering over a line highlights it and shows the name of the area in the form of a tooltip (see Figure \ref{fig:task1-screen2}).
 Multiple areas can be selected at the same time by brushing the axes, and checkbox at the top left of the screen allow for the filtering of features.
 
-% \begin{figure}[ht]
-%     \centering
-%     \includegraphics[width=0.9\linewidth]{images/task1-screenshot1.jpeg}
-%     \caption{A screenshot of the implemented visualization for Task 1.\label{fig:task1-screen1}}
-% \end{figure}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.9\linewidth]{images/task1-screenshot1.jpeg}
+    \caption{A screenshot of the implemented visualization for Task 1.\label{fig:task1-screen1}}
+\end{figure}
 
-% \begin{figure}[ht]
-%     \centering
-%     \includegraphics[width=0.9\linewidth]{images/task1-screenshot2.png}
-%     \caption{A screenshot of the implemented visualization for Task 1, highlighting the entry for \textit{Maastricht}.\label{fig:task1-screen2}}
-% \end{figure}
-
-\subsection{Self Reflection}
-
-% \begin{table}[ht]
-%     \begin{tabular}{|m{0.08\linewidth}|m{0.82\linewidth}|}
-%     \hline
-%     \rowcolor[HTML]{EFEFEF} 
-%     Points & Sub component\\ \hline
-%     \rowcolor[HTML]{DAE8FC} \hfill 2 / 2 & There are at least 10 different rough sketches of nD visualizations that could potentially solve Task 1. \\ \hline
-%     \rowcolor[HTML]{EFEFEF} \hfill 2 / 2 & There are at least 3 different rough sketches of nD visualizations not shown directly in the lecture that could potentially solve Task 1.\\ \hline
-%     \rowcolor[HTML]{DAE8FC} \hfill 2 / 2 & The three different detailed sketches can solve Task 1.\\ \hline
-%     \rowcolor[HTML]{EFEFEF} \hfill 2 / 2 & The detailed sketches could be implemented without confusion by a third-party. \\ \hline
-%     \rowcolor[HTML]{DAE8FC} \hfill 2 / 2 & The tradeoffs of the detailed sketches for Task 1 are discussed well.\\ \hline
-%     \rowcolor[HTML]{EFEFEF} \hfill 1 / 1 & The chosen visualization sketch can solve Task 1 well. \\ \hline
-%     \rowcolor[HTML]{DAE8FC} \hfill 2 / 2 & It is well argued why the chosen visualization sketch was chosen.\\ \hline
-%     \rowcolor[HTML]{EFEFEF} \hfill 4 / 5 & The final visualization sketch is fully implemented and suitable for Task 1. \\ \hline
-%     \rowcolor[HTML]{DAE8FC} \hfill 4 / 4 & Labels, colors and other design elements have been included in the implementation and are suitable.\\ \hline
-%     \rowcolor[HTML]{EFEFEF} \hfill 5 / 5 & Interactivity for filtering and selecting variables has been built into the visualization and is fully functional\\ \hline
-%     \rowcolor[HTML]{DAE8FC} \hfill 2 / 2 & Task 1 has been performed well with the implemented visualization.\\ \hline
-%     \rowcolor[HTML]{EFEFEF} \hfill 1 / 1 & You have self-reflected on this rubric, and filled in your expected amount of points for each sub component.\\ \hline
-%     \end{tabular}%
-% \end{table}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.9\linewidth]{images/task1-screenshot2.png}
+    \caption{A screenshot of the implemented visualization for Task 1, highlighting the entry for \textit{Maastricht}.\label{fig:task1-screen2}}
+\end{figure}
 
 %
 % Week 3
 %
+\clearpage
 \section{Spatial visualization} \noindent
 The second task is as follows: \textit{"Explore the geospatial distribution of both the absolute and relative feature distributions over the entire spatial region for up to 3 selected features."}.
 
@@ -155,44 +134,44 @@ The second task is as follows: \textit{"Explore the geospatial distribution of b
 The first sketches for solving this task can be seen in Figure \ref{fig:task2-sheet1}.
 If the image is not large enough, you can also find the original scan in the source code under \textit{report/images/}.
 
-% \begin{figure}[ht]
-%     \centering
-%     \includegraphics[width=0.75\linewidth]{images/task2-sheet1.png}
-%     \caption{First sketches for Task 2.\label{fig:task2-sheet1}}
-% \end{figure}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/task2-sheet1.png}
+    \caption{First sketches for Task 2.\label{fig:task2-sheet1}}
+\end{figure}
 
 \subsection{Best 3 sketches} \noindent
 The first sketch considered can be seen in Figure \ref{fig:task2-sheet2}.
 The \textbf{advantages} of this design include that it is the easiest to understand and use out of all my ideas, and the land area mapping is somewhat relevant since we are plotting distances.
 The \textbf{disadvantages} of this design include that small areas are quite difficult to see, and mapping to land area still adds a bias for larger areas.
 
-% \begin{figure}[ht]
-%     \centering
-%     \includegraphics[width=0.75\linewidth]{images/task2-sheet2.png}
-%     \caption{The first in-depth sketch for Task 2. This design shows a chloropleth map for visualizing the relative spatial distribution. Color and features of the parallel coordinates plot can be customized through user interaction, as can the selection / deselection of multiple areas through dragging or brushing. Hovering over areas or lines brings up the exact values of the relevant features. Compared to the other designs this design is not really "unique", it is more so that the other designs build on top of this one.\label{fig:task2-sheet2}}
-% \end{figure}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/task2-sheet2.png}
+    \caption{The first in-depth sketch for Task 2. This design shows a chloropleth map for visualizing the relative spatial distribution. Color and features of the parallel coordinates plot can be customized through user interaction, as can the selection / deselection of multiple areas through dragging or brushing. Hovering over areas or lines brings up the exact values of the relevant features. Compared to the other designs this design is not really "unique", it is more so that the other designs build on top of this one.\label{fig:task2-sheet2}}
+\end{figure}
 
 \noindent
 The second sketch considered can be seen in Figure \ref{fig:task2-sheet3}.
 The \textbf{advantages} of this design include that it can encode more than one feature at a time, and serves as a more compact visualization due to not needing any filtering.
 The \textbf{disadvantages} of this design include that you cannot compare areas feature by feature, and that it still suffers from the same disadvantages as Figure \ref{fig:task2-sheet2}.
 
-% \begin{figure}[ht]
-%     \centering
-%     \includegraphics[width=0.75\linewidth]{images/task2-sheet3.png}
-%     \caption{The second in-depth sketch for Task 2. This design shows a chloropleth map similar to Figure \ref{fig:task2-sheet2}, but this map instead shows the \textit{difference} between two features.\label{fig:task2-sheet3}}
-% \end{figure}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/task2-sheet3.png}
+    \caption{The second in-depth sketch for Task 2. This design shows a chloropleth map similar to Figure \ref{fig:task2-sheet2}, but this map instead shows the \textit{difference} between two features.\label{fig:task2-sheet3}}
+\end{figure}
 
 \noindent
 The third sketch considered can be seen in Figure \ref{fig:task2-sheet4}.
 The \textbf{advantages} of this design include that it can encode more than feature at a time, and that it does not suffer from the same area bias as the previous two designs.
 The \textbf{disadvantages} of this design include that it is more complicated to implement, and that the original shape can potentially become very distorted depending on the distributions.
 
-% \begin{figure}[ht]
-%     \centering
-%     \includegraphics[width=0.75\linewidth]{images/task2-sheet4.png}
-%     \caption{The third in-depth sketch for Task 2. This design shows a cartogram for visualizing the relative spatial distribution. Both the color as well as the size of the areas can be customized by the user, and it also includes all other user interactions from Figure \ref{fig:task2-sheet2}.\label{fig:task2-sheet4}}
-% \end{figure}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/task2-sheet4.png}
+    \caption{The third in-depth sketch for Task 2. This design shows a cartogram for visualizing the relative spatial distribution. Both the color as well as the size of the areas can be customized by the user, and it also includes all other user interactions from Figure \ref{fig:task2-sheet2}.\label{fig:task2-sheet4}}
+\end{figure}
 
 \noindent
 In the end I opted for the first design, as it successfully completes the given task while not adding any additional complexity.
@@ -208,57 +187,29 @@ Screenshots of the visualization can be found in Figures \ref{fig:task2-screen1}
 Figure \ref{fig:task2-screen1} gives a general overview of the UI. The controls in the top left allow for dynamic coloring of both plots and the checkboxes allow for filtering of the features for the parallel coordinates plot. Hovering over a spacial area highlights it and the corresponding line on the parallel coordinates plot, and vice-versa, and also brings up a tooltip showing the exact value of the area for the feature corresponding to the color (absolute feature distribution).
 Figure \ref{fig:task2-screen2} shows how multiple areas can be selected by brushing the axes on the parallel coordinates plot, and how that is also visualized on the chloropleth map, and Figure \ref{fig:task2-screen3} shows how multiple areas can be selected by clicking and dragging on the chloropleth map, and how that is also visualized on the parallel coordinates plot (relative feature distribution).
 
-% \begin{figure}[ht]
-%     \centering
-%     \includegraphics[width=0.9\linewidth]{images/task2-screenshot1.jpeg}
-%     \caption{A screenshot of the implemented visualization for Task 2.\label{fig:task2-screen1}}
-% \end{figure}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.9\linewidth]{images/task2-screenshot1.jpeg}
+    \caption{A screenshot of the implemented visualization for Task 2.\label{fig:task2-screen1}}
+\end{figure}
 
-% \begin{figure}[ht]
-%     \centering
-%     \includegraphics[width=0.9\linewidth]{images/task2-screenshot2.jpeg}
-%     \caption{A screenshot of the implemented visualization for Task 2, showcasing brushing on the parallel coordinates plot.\label{fig:task2-screen2}}
-% \end{figure}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.9\linewidth]{images/task2-screenshot2.jpeg}
+    \caption{A screenshot of the implemented visualization for Task 2, showcasing brushing on the parallel coordinates plot.\label{fig:task2-screen2}}
+\end{figure}
 
-% \begin{figure}[ht]
-%     \centering
-%     \includegraphics[width=0.9\linewidth]{images/task2-screenshot3.jpeg}
-%     \caption{A screenshot of the implemented visualization for Task 2, showcasing selection of spatial areas.\label{fig:task2-screen3}}
-% \end{figure}
-
-\subsection{Self Reflection}
-
-% \begin{table}[ht]
-%     \begin{tabular}{|m{0.08\linewidth}|m{0.82\linewidth}|}
-%     \hline
-%     \rowcolor[HTML]{EFEFEF} 
-%     Points & Sub component \\ \hline
-%     \rowcolor[HTML]{DAE8FC} \hfill 2 / 2 & There are at least 10 different rough sketches of spatial visualizations that could potentially solve Task 2. \\ \hline
-%     \rowcolor[HTML]{EFEFEF} \hfill 2 / 2 & There are at least 3 different sketches of spatial visualizations not shown directly in the lecture that could potentially solve Task 2. \\ \hline
-%     \rowcolor[HTML]{DAE8FC} \hfill 2 / 2 & The three different detailed sketches can solve Task 2.\\ \hline
-%     \rowcolor[HTML]{EFEFEF} \hfill 2 / 2 & The detailed sketches could be implemented without confusion by a third-party. \\ \hline
-%     \rowcolor[HTML]{DAE8FC} \hfill 2 / 2 & The tradeoffs of the detailed sketches for Task 2 are discussed well.\\ \hline
-%     \rowcolor[HTML]{EFEFEF} \hfill 1 / 1 & The chosen visualization sketch can solve Task 2 well. \\ \hline
-%     \rowcolor[HTML]{DAE8FC} \hfill 2 / 2 & It is well argued why the chosen visualization sketch was chosen.\\ \hline
-%     \rowcolor[HTML]{EFEFEF} \hfill 5 / 5 & The final visualization sketch is fully implemented and suitable for Task 2. \\ \hline
-%     \rowcolor[HTML]{DAE8FC} \hfill 4 / 4 & Labels, colors and other design elements have been included in the implementation and are suitable.\\ \hline
-%     \rowcolor[HTML]{EFEFEF} \hfill 5 / 5 & Interactivity for filtering and selecting variables, \textbf{and selecting spatial areas} has been built into the visualization, is fully functional and has low cost of interaction. \\ \hline
-%     \rowcolor[HTML]{DAE8FC} \hfill 2 / 2 & Task 2 has been performed well with the implemented visualization.\\ \hline
-%     \rowcolor[HTML]{EFEFEF} \hfill 1 / 1 & You have self-reflected on this rubric, and filled in your expected amount of points for each sub component.\\ \hline
-%     \end{tabular}%
-% \end{table}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.9\linewidth]{images/task2-screenshot3.jpeg}
+    \caption{A screenshot of the implemented visualization for Task 2, showcasing selection of spatial areas.\label{fig:task2-screen3}}
+\end{figure}
 
 %
 % Week 4
 %
-\section{Linked Clustering}
-\textcolor{red}{Some notes relating to this weeks submission:
-\begin{itemize}
-    \item For better formating, I have removed the pictures from previous week's tasks. They can still be found in the attached source code under \textit{report/images/}.
-    \item The full dataset is too big to be uploaded to github. I therefore included the smaller \textit{limburg} dataset in the attached source code so it can still be run.
-\end{itemize}}
-
-\noindent
+\clearpage
+\section{Linked Clustering} \noindent
 The third task is as follows: \textit{"Explore the similarities between spatial areas."}.
 For this task I used the $k$-means clustering algorithm to cluster areas by similatity.
 
@@ -319,28 +270,5 @@ The cache is cleared and clusters are recomputed only upon pressing the "Resampl
     \includegraphics[width=0.9\linewidth]{images/task3-screenshot3.PNG}
     \caption{A closer look at the $k$-means interaction below the filtering controls.\label{fig:task3-screen3}}
 \end{figure}
-
-\subsection{Self Reflection}
-
-\begin{table}[h!]{
-    \begin{tabular}{|m{0.08\linewidth}|m{0.82\linewidth}|}
-    \hline
-    \rowcolor[HTML]{EFEFEF} 
-    Points & Sub component \\ \hline
-    \rowcolor[HTML]{DAE8FC} \hfill 2 / 2 & There are at least 3 different rough sketches of how to link the output of the clustering to the nD visualization. \\ \hline
-    \rowcolor[HTML]{EFEFEF} \hfill 1 / 1 & The chosen interaction of the output of the clustering to the nD visualization is well argued for. \\ \hline
-    \rowcolor[HTML]{DAE8FC} \hfill 2 / 2 & There are at least 3 different rough sketches of how to link the output of the clustering to the spatial visualization. \\\hline
-    \rowcolor[HTML]{EFEFEF} \hfill 1 / 1 & The chosen interaction of the output of the clustering to the spatial visualization is well argued for. \\ \hline
-    \rowcolor[HTML]{DAE8FC} \hfill 2 / 2 & There are at least 3 different rough sketches of how to interact with k-means. \\ \hline
-    \rowcolor[HTML]{EFEFEF} \hfill 1 / 1 & The chosen interaction with k-means is well argued for. \\ \hline
-    \rowcolor[HTML]{DAE8FC} \hfill 5 / 5 & The final visualization sketches are fully implemented and are suitable for Task 3. \\ \hline
-    \rowcolor[HTML]{DAE8FC} \hfill 4 / 4 & The clustering algorithm can be interacted with in a suitable manner. \\ \hline
-    \rowcolor[HTML]{EFEFEF} \hfill 4 / 4 & The clustering is linked well to the multidimensional visualization through interactions. \\ \hline
-    \rowcolor[HTML]{DAE8FC} \hfill 4 / 4 & The clustering is linked well to the spatial visualization through interactions. \\ \hline
-    \rowcolor[HTML]{DAE8FC} \hfill 3 / 3 & Task 3 has been performed with the implemented visualization. \\ \hline
-    \rowcolor[HTML]{EFEFEF} \hfill 1 / 1 & You have self-reflected on this rubric, and filled in your expected amount of points for each sub component. \\ \hline
-    \end{tabular}%
-    }
-\end{table}
 
 \end{document}
