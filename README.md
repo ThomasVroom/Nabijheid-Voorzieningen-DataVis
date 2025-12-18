@@ -1,5 +1,5 @@
 # 'Nabijheid Voorzieningen' Data Visualization
-<img src="./report/images/task3-screenshot2.jpeg" height=130> <img src="./report/images/task1-screenshot1.jpeg" height=130>
+<img src="./report/images/task3-screenshot2.jpeg" height=175> <img src="./report/images/task1-screenshot1.jpeg" height=175>
 
 The [Nabijheid voorzieningen; afstand locatie, regionale cijfers](https://opendata.cbs.nl/#/CBS/nl/dataset/80305ned/table?ts=1762443943511) dataset from the CBS contains information on average distances to common facilities such as hospitals, schools, train stations etc. for Dutch municipalities.
 This project creates a visualization of a subset of the 2023 version of this dataset using the [D3](https://d3js.org/) JavaScript library.
